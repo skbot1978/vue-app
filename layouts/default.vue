@@ -2,7 +2,7 @@
   <v-app>
     <v-navigation-drawer v-model="drawer" app right/>
     <v-toolbar app>
-      <v-toolbar-title>Welcome
+      <v-toolbar-title>สวัสดี
         {{ user.name }}
         {{ online ? 'ONLINE' : 'OFFLINE' }}
       </v-toolbar-title>
