@@ -2,7 +2,10 @@
   <v-app>
     <v-navigation-drawer v-model="drawer" app right/>
     <v-toolbar app>
-      <v-toolbar-title>VueApp</v-toolbar-title>
+      <v-toolbar-title>Welcome
+        {{ user.name }}
+        {{ online ? 'ONLINE' : 'OFFLINE' }}
+      </v-toolbar-title>
       <v-spacer/>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
     </v-toolbar>
@@ -14,6 +17,12 @@
 
 <script>
 export default {
+  data() {
+    return {
+      user: {},
+    }
+  },
+
   computed: {
     online: {
       get() {
@@ -32,6 +41,15 @@ export default {
       },
     },
   },
+
+  created() {
+    let user = window.sessionStorage.getItem('user')
+    if (!user) {
+      return this.$router.replace('/')
+    }
+    this.user = JSON.parse(user) // แปลงยูสเดิมจาก stringnifier ให้เป็น JSON
+    this.$store.dispatch('loadStudents') // โหลดข้อมูล action  loadStudents  ใน store/index
+  }, // created
 
   mounted() {
     this.$store.commit('setOnline', window.navigator.onLine)
