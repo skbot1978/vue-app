@@ -20,7 +20,6 @@
     <student-box
       v-for="st in students2" :key="st.stCode" :student="st"
       @phone="onPhone"
-      @click="onClick"
     />
 
     <!--
@@ -112,11 +111,9 @@ export default {
         console.log('save ไม่สำเร็จนะ')
       }
     },
-    onPhone() {
-      console.log('student list phone')
-    },
-    onClick() {
-      console.log('student list click')
+    onPhone(stCode) {
+      console.log('รหัสนักเรียน', stCode)
+      this.$router.push('/student-modifier?stCode=' + stCode)
     },
   },
 }

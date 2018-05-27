@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     doClick() {
-      this.$emit('phone')
+      this.$emit('phone', this.student.stCode)
     },
   },
 }

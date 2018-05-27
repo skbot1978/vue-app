@@ -21,6 +21,14 @@ export const mutations = {
   setStudents(state, data) {
     state.students = data
   },
+  updStudent(state, data) {
+    let idx = state.students.findIndex(x => x.stCode === data.stCode)
+    if (idx === -1) {
+      state.students.push(data)
+    } else {
+      state.students.splice(idx, 1, data)
+    }
+  },
 }
 
 export const actions = {
@@ -33,7 +41,7 @@ export const actions = {
     // 3. ยิง api เพื่อข้อมูลใหม่จาก server มาแคชไว้ในเครื่องโดยยิงไปที่ api
     // let res = await Vue.axios.post('/student/list?room=2', { room: '2', year: 3 })
     // let res = await Vue.axios.get('/student/list?room=2', { room: '2', year: 3 })
-    let res = await Vue.axios.get('/student/list ')
+    let res = await Vue.axios.get('/student/list')
     // let res = await Vue.axios.get('/student/list?room=2')
     // let res = await Vue.axios.get('/student/list', { params: { room: 2 } })
 
@@ -49,5 +57,9 @@ export const actions = {
     }
     store.commit('setUser', JSON.parse(user))
     return true
+  },
+  updStudent(store, data) {
+    store.commit('updStudent', data)
+    window.localStorage.setItem('students', JSON.stringify(store.state.students))
   },
 }
