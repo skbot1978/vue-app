@@ -3,6 +3,7 @@
   <div>
     <div>
       <h1>{{ user.name }}</h1>
+
       <select v-model="room">
         <option v-for="r in roomList" :key="r" :value="r">ห้อง {{ r }}</option>
       </select>
@@ -17,10 +18,12 @@
       <v-btn @click="doSave">SAVE</v-btn>
     </div>
     <student-box
-      v-for="st in list" :key="st.code" :student="st"
+      v-for="st in students2" :key="st.stCode" :student="st"
       @phone="onPhone"
       @click="onClick"
     />
+
+    <!--
     <table>
       <tr>
         <td>รหัส</td>
@@ -33,6 +36,7 @@
         <td>{{ st.room }}</td>
       </tr>
     </table>
+    -->
   </div>
 </template>
 <script>
@@ -50,7 +54,7 @@ export default {
         { code: '0002', firstName: 'Name2', lastName: 'Lastname2', room: '1/1' },
         { code: '0003', firstName: 'Name3', lastName: 'Lastname3', room: '1/1' },
       ],
-      room: '3',
+      room: '1',
     }
   }, // data
   computed: {
@@ -82,7 +86,7 @@ export default {
       //   // return prev
       // }, [])
       return Object.keys(this.students.reduce((p, st) => {
-        p[st.room] = st.room
+        p[st.stRoom] = st.stRoom
         return p
       }, {}))
     },
@@ -94,7 +98,7 @@ export default {
       //   }
       // }
       // return out
-      return this.students.filter(st => st.room === this.room)
+      return this.students.filter(st => st.stRoom === this.room)
     },
   }, // computed
   methods: {

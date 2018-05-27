@@ -38,9 +38,9 @@ export const actions = {
     // let res = await Vue.axios.get('/student/list', { params: { room: 2 } })
 
     // 4. commit เป็นการเรียกใช้ mutations  เพื่อแก้ไข้อมูลใน state หรือ store
-    store.commit('setStudents', res.data)
+    store.commit('setStudents', res.data.student)
     // 5. เก็บลง localStorage
-    window.localStorage.setItem('students', JSON.stringify(res.data))
+    window.localStorage.setItem('students', JSON.stringify(res.data.student))
   },
   loadUser(store) {
     let user = window.sessionStorage.getItem('user')
